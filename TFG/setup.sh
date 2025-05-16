@@ -65,4 +65,5 @@ done
 chmod 600 "$PASSWORD_FILE"
 echo "Contraseñas guardadas en $PASSWORD_FILE"
 
+
 echo "¡Setup completado!"
