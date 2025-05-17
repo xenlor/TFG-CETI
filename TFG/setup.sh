@@ -41,18 +41,23 @@ echo "deb [signed-by=/usr/share/keyrings/elastic-archive-keyring.gpg] https://ar
 
 sudo apt update
 
-echo "4) Instalando Suricata y ELK..."
-sudo apt install -y suricata elasticsearch logstash kibana
+echo "4) Instalando Mosquitto, Suricata y ELK..."
+sudo apt install -y mosquitto mosquitto-clients suricata elasticsearch logstash kibana
 
 echo "5) Copiando ficheros de configuración desde .config..."
-sudo cp "$SURICATA_CONF_SRC"          "$SURICATA_CONF_DST"
-sudo cp "$LOGSTASH_PIPELINES_LIST_SRC" "$LOGSTASH_PIPELINES_LIST_DST"
-sudo cp "$LOGSTASH_PIPELINE_SRC"       "$LOGSTASH_PIPELINE_CONF_DST"
-sudo cp "$KIBANA_CONF_SRC"             "$KIBANA_CONF_DST"
+sudo cp "$SURICATA_CONF_SRC"            "$SURICATA_CONF_DST"
+sudo cp "$LOGSTASH_PIPELINES_LIST_SRC"   "$LOGSTASH_PIPELINES_LIST_DST"
+sudo cp "$LOGSTASH_PIPELINE_SRC"         "$LOGSTASH_PIPELINE_CONF_DST"
+sudo cp "$KIBANA_CONF_SRC"               "$KIBANA_CONF_DST"
 
 echo "6) Habilitando y arrancando servicios..."
-sudo systemctl enable elasticsearch logstash kibana
-sudo systemctl start   elasticsearch logstash kibana
+# Broker MQTT
+sudo systemctl enable mosquitto
+sudo systemctl start   mosquitto
+
+# IDS y ELK
+sudo systemctl enable suricata elasticsearch logstash kibana
+sudo systemctl start   suricata elasticsearch logstash kibana
 
 echo "7) Generando contraseñas de usuarios internos..."
 : > "$PASSWORD_FILE"
