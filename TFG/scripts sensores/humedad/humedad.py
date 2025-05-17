@@ -6,7 +6,7 @@ import random
 BROKER = "192.168.1.10"
 TOPIC = "iot/sensor/humedad"
 
-client = mqtt.Client("cliente_ataque")
+client = mqtt.Client("sim_humedad")
 client.connect(BROKER, 1883, 60)
 
 print("🚀 Iniciando simulación benigna de humedad...")
