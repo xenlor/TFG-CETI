@@ -5,7 +5,7 @@ set -euo pipefail
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 VENV_DIR="$PROJECT_DIR/iot-env"
 REQ_FILE="$PROJECT_DIR/requirements.txt"
-PASSWORD_FILE="$PROJECT_DIR/iot_passwords.txt"
+PASSWORD_FILE="$PROJECT_DIR/credenciales_elk.txt"
 
 # Ficheros de configuración en .config
 CONFIG_DIR="$PROJECT_DIR/.config"
@@ -45,10 +45,10 @@ echo "4) Instalando Suricata y ELK..."
 sudo apt install -y suricata elasticsearch logstash kibana
 
 echo "5) Copiando ficheros de configuración desde .config..."
-sudo cp "$SURICATA_CONF_SRC"            "$SURICATA_CONF_DST"
-sudo cp "$LOGSTASH_PIPELINES_LIST_SRC"   "$LOGSTASH_PIPELINES_LIST_DST"
-sudo cp "$LOGSTASH_PIPELINE_SRC"         "$LOGSTASH_PIPELINE_CONF_DST"
-sudo cp "$KIBANA_CONF_SRC"               "$KIBANA_CONF_DST"
+sudo cp "$SURICATA_CONF_SRC"          "$SURICATA_CONF_DST"
+sudo cp "$LOGSTASH_PIPELINES_LIST_SRC" "$LOGSTASH_PIPELINES_LIST_DST"
+sudo cp "$LOGSTASH_PIPELINE_SRC"       "$LOGSTASH_PIPELINE_CONF_DST"
+sudo cp "$KIBANA_CONF_SRC"             "$KIBANA_CONF_DST"
 
 echo "6) Habilitando y arrancando servicios..."
 sudo systemctl enable elasticsearch logstash kibana
@@ -59,11 +59,15 @@ echo "7) Generando contraseñas de usuarios internos..."
 for USER in elastic kibana_system; do
   echo "---- $USER ----" >> "$PASSWORD_FILE"
   printf 'y\n' | sudo /usr/share/elasticsearch/bin/elasticsearch-reset-password \
-    -u "$USER" --batch >> "$PASSWORD_FILE" 2>&1
+    -u "$USER" --batch -f >> "$PASSWORD_FILE" 2>&1
   echo >> "$PASSWORD_FILE"
 done
 chmod 600 "$PASSWORD_FILE"
 echo "Contraseñas guardadas en $PASSWORD_FILE"
 
-
+echo
 echo "¡Setup completado!"
+echo "IMPORTANTE: Debes actualizar las credenciales en los ficheros de configuración:"
+echo "  • Usuario 'kibana_system' en /etc/kibana/kibana.yml"
+echo "  • Usuario 'elastic' en /etc/logstash/conf.d/suricata.conf"
+echo "  Consulta las nuevas credenciales en: $PASSWORD_FILE"
