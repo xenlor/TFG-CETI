@@ -13,12 +13,14 @@ SURICATA_CONF_SRC="$CONFIG_DIR/suricata.yaml"
 LOGSTASH_PIPELINES_LIST_SRC="$CONFIG_DIR/pipelines.yml"
 LOGSTASH_PIPELINE_SRC="$CONFIG_DIR/suricata.conf"
 KIBANA_CONF_SRC="$CONFIG_DIR/kibana.yml"
+MOSQUITTO_CONF="$CONFIG_DIR/remote.conf"
 
 # Destinos estándar
 SURICATA_CONF_DST="/etc/suricata/suricata.yaml"
 LOGSTASH_PIPELINES_LIST_DST="/etc/logstash/pipelines.yml"
 LOGSTASH_PIPELINE_CONF_DST="/etc/logstash/conf.d/suricata.conf"
 KIBANA_CONF_DST="/etc/kibana/kibana.yml"
+MOSQUITTO_CONF_DST="/etc/mosquitto/conf.d/remote.conf"
 
 echo "1) Actualizando apt y paquetes base..."
 sudo apt update
@@ -49,6 +51,7 @@ sudo cp "$SURICATA_CONF_SRC"            "$SURICATA_CONF_DST"
 sudo cp "$LOGSTASH_PIPELINES_LIST_SRC"   "$LOGSTASH_PIPELINES_LIST_DST"
 sudo cp "$LOGSTASH_PIPELINE_SRC"         "$LOGSTASH_PIPELINE_CONF_DST"
 sudo cp "$KIBANA_CONF_SRC"               "$KIBANA_CONF_DST"
+sudo cp "$MOSQUITTO_CONF"                "$MOSQUITTO_CONF_DST"
 
 echo "6) Habilitando y arrancando servicios..."
 # Broker MQTT
