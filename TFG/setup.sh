@@ -41,8 +41,8 @@ echo "deb [signed-by=/usr/share/keyrings/elastic-archive-keyring.gpg] https://ar
 
 sudo apt update
 
-echo "4) Instalando Mosquitto, Suricata y ELK..."
-sudo apt install -y mosquitto mosquitto-clients suricata elasticsearch logstash kibana
+echo "4) Instalando IPTables, Mosquitto, Suricata y ELK..."
+sudo apt install -y mosquitto mosquitto-clients suricata elasticsearch logstash kibana iptables
 
 echo "5) Copiando ficheros de configuración desde .config..."
 sudo cp "$SURICATA_CONF_SRC"            "$SURICATA_CONF_DST"
