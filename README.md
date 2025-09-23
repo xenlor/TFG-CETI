@@ -86,7 +86,3 @@ El proyecto incluye:
 ## 📜 Licencia
 
 Este proyecto está bajo la licencia **MIT** – ver el archivo [LICENSE](LICENSE) para más información.
-
----
-
-¿Quieres que lo prepare **en formato real de Markdown** (`README.md`) con el diagrama de arquitectura que aparece en tu memoria exportado como imagen? Así podría generar el archivo directamente para que lo subas al repositorio.
