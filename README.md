@@ -7,7 +7,7 @@
 
 ## 📌 Descripción del Proyecto
 
-Este repositorio contiene el Trabajo de Fin de Grado de **Esteban Castillo Loren**, cuyo objetivo es **implementar y analizar la seguridad en una red IoT simulada utilizando Raspberry Pi y técnicas de Machine Learning**.  
+Este repositorio contiene mi Trabajo de Fin de Grado, cuyo objetivo es **implementar y analizar la seguridad en una red IoT simulada utilizando Raspberry Pi y técnicas de Machine Learning**.  
 El proyecto reproduce un entorno que emula dispositivos IoT, captura tráfico de red y detecta anomalías mediante un pipeline basado en Suricata, ELK Stack y modelos de aprendizaje automático.
 
 ## 🎯 Objetivos
